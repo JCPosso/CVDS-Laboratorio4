@@ -7,6 +7,7 @@ package hangman.model;
     - Si con las reglas anteriores sobrepasa 500 puntos, el puntaje es 500.
  */
 public class PowerScore implements GameScore{
+    public int score = 0;
     /**
      * Este metodo que calcula en puntaje utilizando la formula (5^correctCount) - ( 8 * incorrectCount ) 
      * @pre inicia con 0 puntos
@@ -16,6 +17,6 @@ public class PowerScore implements GameScore{
      * @return score  
      */
     public int calculateScore (int correctCount , int incorrectCount){
-        return null;
+        return 0;
     }
 }

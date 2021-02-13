@@ -15,7 +15,7 @@ public class BonusScore implements GameScore {
      * @return score  
      */
     public int calculateScore (int correctCount , int incorrectCount){
-        return null;
+        return  0;
     }
 
 }

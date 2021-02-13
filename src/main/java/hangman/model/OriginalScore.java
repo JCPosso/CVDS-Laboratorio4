@@ -1,4 +1,4 @@
-package hagman.model;
+package hangman.model;
 /**
  *  - Es el esquema actual, se inicia con 100 puntos.
     - No se bonifican las letras correctas.
@@ -6,6 +6,7 @@ package hagman.model;
     - El puntaje minimo es 0.
  */
 public class OriginalScore implements GameScore{
+    public int score = 100;
     /**
      * Este metodo que calcula en puntaje utilizando la formula 100 - (10 * incorrectCount )
      * @pre inicia con 100 puntos
@@ -16,6 +17,6 @@ public class OriginalScore implements GameScore{
      * @return score  
      */
     public int calculateScore (int correctCount , int incorrectCount){
-        return null;
+        return 0;
     }
 }
