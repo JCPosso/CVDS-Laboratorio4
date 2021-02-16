@@ -16,13 +16,19 @@ public class BonusScore implements GameScore {
      */
     public int calculateScore (int correctCount , int incorrectCount){
         int res = 0;
-        if ( correctCount <0 || incorrectCount <0){
+        int form = ((10 * correctCount ) - (5 * incorrectCount));
+
+        if ( correctCount <0 && incorrectCount <0){
             res = -1;
-        }else if( (100 - (10 * incorrectCount )) <0 ){
-            res =0;
+        }
+        else if( form < 0 ){
+            res = 0;
+        }
+        else if(form > 100){
+            res = 100;
         }
         else {  
-            res = 100 - (10 * incorrectCount ) ;            
+            res = form;  
         }
         return res;
     }

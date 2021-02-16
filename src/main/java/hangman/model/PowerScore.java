@@ -18,12 +18,21 @@ public class PowerScore implements GameScore{
      */
     public int calculateScore (int correctCount , int incorrectCount){
         int res = 0;
-        if ( (5^correctCount - 8 * incorrectCount) > 500){
+        int form = (int) ((Math.pow(5, correctCount)) - (8 * incorrectCount));
+        
+        if(correctCount <= 0 && incorrectCount <= 0){
+            res = 0;
+        }
+        else if ( form > 500){
             res = 500;
         }
-        else {  
-            res = 5^correctCount - 8 * incorrectCount ;            
+        else if(form < 0){
+            res = 0;
         }
+        else {  
+            res = form;
+        }
+
         return res;
     }
 }
