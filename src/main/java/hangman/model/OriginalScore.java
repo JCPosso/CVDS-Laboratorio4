@@ -1,4 +1,5 @@
 package hangman.model;
+import hangman.exceptions.GameScoreExceptions;
 /**
  *  - Es el esquema actual, se inicia con 100 puntos.
     - No se bonifican las letras correctas.
@@ -6,28 +7,35 @@ package hangman.model;
     - El puntaje minimo es 0.
  */
 public class OriginalScore implements GameScore{
-    public int score = 100;
+    private int score = 100;
+    private int limit = 100;
     /**
      * Este metodo que calcula en puntaje utilizando la formula 100 - (10 * incorrectCount )
      * @pre inicia con 100 puntos
      * @pre no se bonifican las letras incorrectas
-     * @pos el puntaje minumo es cero
+     * @pos el puntaje minimo es cero
      * @param correctCount contador de letras correctas
      * @param incorrectCount contador de las letras incorrectas
+     * @throws GameScoreException   correctCount<0 || incorrectCount<0 || 100 - (10 * incorrectCount )<0
      * @return score  
      */
-    public int calculateScore (int correctCount , int incorrectCount){
-        int res = 0;
-        int form = (100 - (10 * incorrectCount ));
+    @Override
+    public int calculateScore (int correctCount , int incorrectCount) throws GameScoreExceptions{
         if ( correctCount <0 || incorrectCount <0){
-            res = -1;
-        }else if( form <0 ){
-            res =0;
+            throw new GameScoreExceptions(GameScoreExceptions.VALOR_NEGATIVO);
         }
-        else {  
-            res = form;
+        if (100 - (10 * incorrectCount )<0){
+            throw new GameScoreExceptions(GameScoreExceptions.VALOR_FUERA_LIMITE);
         }
+        return (100 - (10 * incorrectCount ));
+    }
+    @Override
+    public int getScore() {
+        return score;
+    }
 
-        return res;
+    @Override
+    public int getLimit() {
+        return limit;
     }
 }

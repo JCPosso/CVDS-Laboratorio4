@@ -1,4 +1,7 @@
 package hangman.model;
+
+import hangman.exceptions.GameScoreExceptions;
+
 /**
  *  - El juego inicia en 0 puntos.
     - La $i-ésima$ letra correcta se bonifica con $5^i$.
@@ -8,31 +11,39 @@ package hangman.model;
  */
 public class PowerScore implements GameScore{
     public int score = 0;
+    public int limit =500;
     /**
      * Este metodo que calcula en puntaje utilizando la formula (5^correctCount) - ( 8 * incorrectCount ) 
      * @pre inicia con 0 puntos
      * @pos Si con las reglas anteriores sobrepasa 500 puntos, el puntaje es 500.
      * @param correctCount contador de letras correctas
      * @param incorrectCount contador de las letras incorrectas
+     * @throws GameScoreException correctCount<0 || incorrectCount<0 || correctCount>3 || Math.pow(5, correctCount) < (8 * incorrectCount )
      * @return score  
      */
-    public int calculateScore (int correctCount , int incorrectCount){
-        int res = 0;
+    @Override
+    public int calculateScore (int correctCount , int incorrectCount) throws GameScoreExceptions{
+        
         int form = (int) ((Math.pow(5, correctCount)) - (8 * incorrectCount));
         
-        if(correctCount <= 0 && incorrectCount <= 0){
-            res = 0;
+        if(correctCount < 0 || incorrectCount < 0){
+            throw new GameScoreExceptions(GameScoreExceptions.VALOR_NEGATIVO);
         }
-        else if ( form > 500){
-            res = 500;
+        else if ( correctCount>3){
+            throw new GameScoreExceptions(GameScoreExceptions.VALOR_FUERA_LIMITE);
         }
         else if(form < 0){
-            res = 0;
+            throw new GameScoreExceptions(GameScoreExceptions.VALOR_NEGATIVO);
         }
-        else {  
-            res = form;
-        }
+        return form;
+    }
 
-        return res;
+    @Override
+    public int getScore() {
+        return score;
+    }
+    @Override
+    public int getLimit() {
+        return limit;
     }
 }
