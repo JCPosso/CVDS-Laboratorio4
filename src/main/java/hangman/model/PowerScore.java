@@ -35,6 +35,9 @@ public class PowerScore implements GameScore{
         else if(form < 0){
             throw new GameScoreExceptions(GameScoreExceptions.VALOR_NEGATIVO);
         }
+        else if (form == 1){
+            form = 0;
+        }
         return form;
     }
 

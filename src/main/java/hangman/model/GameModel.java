@@ -18,11 +18,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import com.google.inject.Inject;
+
 
 public class GameModel {
     private int incorrectCount;
     private int correctCount;
     private LocalDateTime dateTime;
+    @Inject
     private int gameScore;
     private int[] lettersUsed;
     private GameScore gamescore;

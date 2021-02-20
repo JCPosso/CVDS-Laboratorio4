@@ -24,7 +24,7 @@ public class OriginalScore implements GameScore{
         if ( correctCount <0 || incorrectCount <0){
             throw new GameScoreExceptions(GameScoreExceptions.VALOR_NEGATIVO);
         }
-        if (100 - (10 * incorrectCount )<0){
+        if ( (100-(10*incorrectCount)) <0){
             throw new GameScoreExceptions(GameScoreExceptions.VALOR_FUERA_LIMITE);
         }
         return (100 - (10 * incorrectCount ));
