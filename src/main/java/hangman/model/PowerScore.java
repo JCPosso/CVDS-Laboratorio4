@@ -29,13 +29,10 @@ public class PowerScore implements GameScore{
         if(correctCount < 0 || incorrectCount < 0){
             throw new GameScoreExceptions(GameScoreExceptions.VALOR_NEGATIVO);
         }
-        else if ( correctCount>3){
-            throw new GameScoreExceptions(GameScoreExceptions.VALOR_FUERA_LIMITE);
+        else if ( correctCount > 3){
+            form = 500;
         }
-        else if(form < 0){
-            throw new GameScoreExceptions(GameScoreExceptions.VALOR_NEGATIVO);
-        }
-        else if (form == 1){
+        else if (form == 1 || form < 0){
             form = 0;
         }
         return form;

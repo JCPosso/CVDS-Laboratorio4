@@ -10,7 +10,7 @@ public interface GameScore {
      * @param incorrectCount contador de letras incorrectas
      * @return score 
      **/
-    int getScore();
-    int getLimit();
-    public int calculateScore (int correctCount , int incorrectCount) throws GameScoreExceptions ;
+    public int calculateScore (int correctCount , int incorrectCount) throws GameScoreExceptions;
+    public int getScore();
+    public int getLimit();
 }

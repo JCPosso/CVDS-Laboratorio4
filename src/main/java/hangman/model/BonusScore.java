@@ -26,10 +26,10 @@ public class BonusScore implements GameScore {
             throw new GameScoreExceptions(GameScoreExceptions.VALOR_NEGATIVO);
         }
         else if( form < 0 ){
-            throw new GameScoreExceptions(GameScoreExceptions.VALOR_FUERA_LIMITE);
+            form = 0;
         }
         else if(form > 100){
-            throw new GameScoreExceptions(GameScoreExceptions.VALOR_FUERA_LIMITE);
+            form = 100;
         }
         return form;
     }

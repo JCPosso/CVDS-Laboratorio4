@@ -9,6 +9,11 @@ import hangman.exceptions.GameScoreExceptions;
 public class OriginalScore implements GameScore{
     private int score = 100;
     private int limit = 100;
+
+    public OriginalScore(){
+        
+    }
+
     /**
      * Este metodo que calcula en puntaje utilizando la formula 100 - (10 * incorrectCount )
      * @pre inicia con 100 puntos
@@ -21,20 +26,23 @@ public class OriginalScore implements GameScore{
      */
     @Override
     public int calculateScore (int correctCount , int incorrectCount) throws GameScoreExceptions{
-        if ( correctCount <0 || incorrectCount <0){
+
+        int form = (100 - (10 * incorrectCount));
+
+        if ( correctCount < 0 || incorrectCount <0){
             throw new GameScoreExceptions(GameScoreExceptions.VALOR_NEGATIVO);
         }
-        if ( (100-(10*incorrectCount)) <0){
-            throw new GameScoreExceptions(GameScoreExceptions.VALOR_FUERA_LIMITE);
+        if ( form < 0){
+            form = 0;
         }
-        return (100 - (10 * incorrectCount ));
+        
+        return form;
     }
-    @Override
+
     public int getScore() {
         return score;
     }
 
-    @Override
     public int getLimit() {
         return limit;
     }

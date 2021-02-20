@@ -25,10 +25,11 @@ public class GameModel {
     private int incorrectCount;
     private int correctCount;
     private LocalDateTime dateTime;
-    @Inject
     private int gameScore;
     private int[] lettersUsed;
-    private GameScore gamescore;
+
+    @Inject
+    private GameScore gameScoreManager;
     
     private HangmanDictionary dictionary;
     
@@ -36,17 +37,15 @@ public class GameModel {
     private String randomWord;
     private char[] randomWordCharArray;
     
-    
-   
-    public GameModel(HangmanDictionary dictionary){
+    public GameModel(HangmanDictionary dictionary, GameScore gameScoreManager){
         //this.dictionary = new EnglishDictionaryDataSource();
         this.dictionary=dictionary;
         randomWord = selectRandomWord();
         randomWordCharArray = randomWord.toCharArray();
         incorrectCount = 0;
         correctCount = 0;
-        gameScore = 100;
-        
+        this.gameScoreManager = gameScoreManager;
+        gameScore = gameScoreManager.getScore();
     }
     
     //method: reset
@@ -56,7 +55,7 @@ public class GameModel {
         randomWordCharArray = randomWord.toCharArray();
         incorrectCount = 0;
         correctCount = 0;
-        gameScore = gamescore.getScore();
+        gameScore = gameScoreManager.getScore();
     }
 
     //setDateTime
@@ -81,12 +80,13 @@ public class GameModel {
         } else {
             correctCount += positions.size();
         }
-        try{
-        gameScore= gamescore.calculateScore(incorrectCount, correctCount);
-        }catch (GameScoreExceptions e){
-            System.out.println(correctCount);
-            System.out.println(incorrectCount);
+        try {
+            gameScore = gameScoreManager.calculateScore(correctCount, incorrectCount);
+        } catch (Exception e) {
+            System.out.println(incorrectCount + " " + correctCount);
+            System.out.println(e.getMessage());
         }
+
         return positions;
         
     }

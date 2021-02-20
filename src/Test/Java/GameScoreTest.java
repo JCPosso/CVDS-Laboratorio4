@@ -1,4 +1,3 @@
-package hangman;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -45,10 +44,9 @@ public class GameScoreTest {
     @Test
     public void verificarPuntajeMinimoSeaCeroOriginalScore (){
         try{
-            os.calculateScore(0,100);
-            Assert.fail();
+            Assert.assertEquals(0, os.calculateScore(0,100));
         }catch(GameScoreExceptions e){
-            Assert.assertEquals(e.getMessage(),GameScoreExceptions.VALOR_FUERA_LIMITE);//limite Superior
+            Assert.fail();
         }
     }
 
@@ -77,10 +75,9 @@ public class GameScoreTest {
     @Test
     public void verificarPuntajeMinimoSeaCeroBonusScore (){
         try {
-            bs.calculateScore(1,100);  
-            Assert.fail();          
+            Assert.assertEquals(0, bs.calculateScore(1,100));
         } catch (Exception e) {
-            Assert.assertEquals(e.getMessage(),GameScoreExceptions.VALOR_FUERA_LIMITE);//limite         
+            Assert.fail();         
         }
     }
     @Test
@@ -115,19 +112,17 @@ public class GameScoreTest {
     public void verificarPuntajeMinimoSeaCeroPowerScore (){
         try {
             Assert.assertEquals(0, ps.calculateScore(3,100));  
-            Assert.fail();                  
         } catch (GameScoreExceptions e) {
-            Assert.assertEquals(e.getMessage(),GameScoreExceptions.VALOR_NEGATIVO);//limite          
+            Assert.fail();          
         }
     }
 
     @Test
     public void verificarNoSupereLos500PuntosPowerScore (){
         try {
-            Assert.assertEquals(500, ps.calculateScore(4,0));       
-            Assert.fail();                        
+            Assert.assertEquals(500, ps.calculateScore(4,0));                    
         } catch (GameScoreExceptions e) {
-            Assert.assertEquals(e.getMessage(),GameScoreExceptions.VALOR_FUERA_LIMITE);//limite          
+            Assert.fail();         
         }
     }
 
