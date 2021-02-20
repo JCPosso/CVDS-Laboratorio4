@@ -5,6 +5,7 @@
 ### Parte I
 
 Pruebas de equivalencia implementadas
+![test](img/test.PNG)
 
 ### Parte II
 
